@@ -1,0 +1,18 @@
+name: myworkflow
+on: push
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      # Клонируем репозиторий
+      - uses: actions/checkout@v3
+      # Устанавливаем Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      # Ставим зависимости
+      - run: make setup
+      # Запускаем линтер
+      - run: make lint
+      # Запускаем тесты
+      - run: make test
